@@ -7,7 +7,7 @@ function Card (props) {
   } 
 
   return (
-      <li key = {props._id} className="element">
+      <li className="element">
         <img className="element__image" 
         src={props.src} 
         alt={props.alt}
