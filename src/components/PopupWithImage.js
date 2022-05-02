@@ -1,12 +1,18 @@
 import React from "react";
 
-function PopupWithImage () {
+function PopupWithImage (props) {
   return (
-    <div className="popup imageView">
+    <div className={`popup ${props.isOpen ? 'popup_opened' : ''} imageView`}>
       <figure className="imageView__figure">
-        <img className="imageView__image" src="#" alt="#"/>
-        <figcaption className="imageView__caption">подпись</figcaption>
-        <button className="popup__close-button popup__close-button_imageView" type="button" aria-label="закрыть изображение"></button>
+        <img className="imageView__image" 
+        src={props.card.src} 
+        alt={props.card.alt}/>
+        <figcaption className="imageView__caption">{props.card.alt}</figcaption>
+        <button className="popup__close-button popup__close-button_imageView" 
+        type="button" 
+        aria-label="закрыть изображение"
+        onClick={props.onClose}
+        ></button>
       </figure>
     </div>
   ) 

@@ -12,7 +12,7 @@ function PopupWithForm (props) {
         name={props.name} 
         noValidate>
           {props.children}
-          <button className={`popup__save-button popup__save-button_${props.name}`} type="submit" aria-label="сохранить">Сохранить</button>      
+          <button className={`popup__save-button popup__save-button_${props.name}`} type="submit" aria-label="сохранить">{props.btnText}</button>      
         </form>
         <button 
         className={`popup__close-button popup__close-button_${props.name}`} 
