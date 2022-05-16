@@ -1,21 +1,20 @@
 import React from "react";
 
-function ImagePopup ({card, isOpen, onClose}) {
+function ImagePopup({ card, isOpen, onClose }) {
   return (
-    <div className={`popup ${isOpen && 'popup_opened'} imageView`}>
+    <div className={`popup ${isOpen && "popup_opened"} imageView`}>
       <figure className="imageView__figure">
-        <img className="imageView__image" 
-        src={card.link} 
-        alt={card.name}/>
+        <img className="imageView__image" src={card.link} alt={card.name} />
         <figcaption className="imageView__caption">{card.name}</figcaption>
-        <button className="popup__close-button popup__close-button_imageView" 
-        type="button" 
-        aria-label="закрыть изображение"
-        onClick={onClose}
+        <button
+          className="popup__close-button popup__close-button_imageView"
+          type="button"
+          aria-label="закрыть изображение"
+          onClick={onClose}
         ></button>
       </figure>
     </div>
-  ) 
+  );
 }
 
 export default ImagePopup;
