@@ -23,7 +23,7 @@ function Main (props) {
 
       <section className="elements">
         <ul className="elements__list">
-        {Array.from(props.cards).map((card) =>           
+        {props.cards.map((card) =>(           
           <Card
             card = {card}
             key = {card._id}
@@ -32,7 +32,7 @@ function Main (props) {
             onCardLike={props.onCardLike}
           >
           </Card>
-         
+          )
         )}
         </ul>
       </section>

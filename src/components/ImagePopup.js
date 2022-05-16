@@ -2,7 +2,7 @@ import React from "react";
 
 function ImagePopup ({card, isOpen, onClose}) {
   return (
-    <div className={`popup ${isOpen ? 'popup_opened' : ''} imageView`}>
+    <div className={`popup ${isOpen && 'popup_opened'} imageView`}>
       <figure className="imageView__figure">
         <img className="imageView__image" 
         src={card.link} 
