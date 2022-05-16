@@ -24,61 +24,52 @@ class Api {
     .then (this._checkRes)
   };
 
-  editUserInfo (data) {
+  editUserInfo (dataName, dataAbout) {
     return fetch(`${this._url}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        name: data.name,
-        about: data.description
+        name: dataName,
+        about: dataAbout
       })
     })
 
     .then (this._checkRes)
   }
 
-  editNewAvatar (data) {
+  editNewAvatar (dataAvatar) {
     return fetch(`${this._url}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        avatar: data.avatar
+        avatar: dataAvatar
       })
     })
 
     .then (this._checkRes)
   }
 
-  editNewCard (data) {
+  editNewCard (dataPlace, dataLink) {
     return fetch(`${this._url}/cards`, {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify({
-        name: data.place,
-        link: data.link
+        name: dataPlace,
+        link: dataLink
       })
     })
 
     .then (this._checkRes)
   }
 
-  putLikeCard (id) {
-    return fetch(`${this._url}/cards/${id}/likes`, {
-      method: 'PUT',
-      headers: this._headers
-    })
-
-    .then (this._checkRes)
-  }
-
-  deleteLikeCard (id) {
-    return fetch(`${this._url}/cards/${id}/likes`, {
-      method: 'DELETE',
+  changeLikeCardStatus (id, isLiked) {
+    return fetch (`${this._url}/cards/${id}/likes`, {
+      method: `${isLiked ? 'DELETE' : 'PUT'}`,
       headers: this._headers
   })
 
   .then (this._checkRes)
-  }
+}
 
 
   deleteCard (id) {
@@ -92,12 +83,10 @@ class Api {
 
 }
 
-const api = new Api({
+export const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-39',
   headers: {
     authorization: '6e47bbc5-5375-4cf6-9e12-9c6c5520d107',
     'Content-Type': 'application/json'
   }
 });
-
-export default api;

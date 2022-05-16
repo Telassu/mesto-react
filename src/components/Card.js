@@ -4,49 +4,49 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 function Card (props) {
   const currentUser = useContext(CurrentUserContext)
 
-  const isOwn = props.owner._id === currentUser._id;
-  //const isLiked = props.likes.some((i) => i._id === currentUser._id);
+  const isOwn = props.card.owner._id === currentUser._id;
+  const isLiked = props.card.likes.some(i => i._id === currentUser._id);
 
-  //console.log(isLiked)
-
-  // Создаём переменную, которую после зададим в `className` для кнопки удаления
   const cardDeleteButtonClassName = (
     `'element__delete' ${isOwn 
-    ? ' ' 
-    : 'element__delete element__delete_hidden'}`
+    ? 'element__delete' 
+    : 'element__delete_hidden'}`
     )
 
-  
-// Создаём переменную, которую после зададим в `className` для кнопки лайка
-//  const cardLikeButtonClassName = (
-//    `element__like ${isLiked
-//    ? 'element__like element__like_active' 
-//    : 'element__like element__like_disactive'}`
-//    );
-
+    const cardLikeButtonClassName = (
+    `element__like ${isLiked
+    ? 'element__like element__like_active' 
+    : ' '}`
+    );
 
   function handleClick() {
-    props.onCardClick(props);
-  } 
+    props.onCardClick(props.card);
+  }
+
+  function handleDeleteClick () {
+    props.onCardDelete(props.card)
+  }
 
   function handleLikeClick() {
-    props.onCardLike(props);
+    props.onCardLike(props.card);
   } 
 
   return (
       <li className="element">
         <img className="element__image" 
-        src={props.src} 
-        alt={props.alt}
+        src={props.card.link} 
+        alt={props.card.name}
         onClick={handleClick}
-        onLike={handleLikeClick}
+
         />
-        <button className={cardDeleteButtonClassName} type="button" aria-label="удалить"></button>
+        <button className={cardDeleteButtonClassName} type="button" 
+        aria-label="удалить" onClick={handleDeleteClick}></button>
         <div className="element__text">
-          <h2 className="element__title">{props.alt}</h2>
+          <h2 className="element__title">{props.card.name}</h2>
           <div className="element__like-container">
-            <button className="element__like" type="button" aria-label="нравится"></button>
-            <p className="element__like-counter">{props.likes}</p>
+            <button className={cardLikeButtonClassName} type="button"
+            aria-label="нравится" onClick={handleLikeClick}></button>
+            <p className="element__like-counter">{props.card.likes.length}</p>
           </div>
         </div>
       </li>
