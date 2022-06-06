@@ -20,7 +20,7 @@ function App() {
   const [isImagePopupOpen, setIsImagePopupOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
   //получение информации
   useEffect(() => {
@@ -59,7 +59,7 @@ function App() {
 
   //обновление информации пользователя
   function handleOnUpdateUser(data) {
-    setIsLoading(true)
+    setIsLoading(true);
 
     api
       .editUserInfo(data.name, data.about)
@@ -75,7 +75,7 @@ function App() {
 
   //обновление аватара
   function handleOnUpdateAvatar(data) {
-    setIsLoading(true)
+    setIsLoading(true);
 
     api
       .editNewAvatar(data.avatar)
@@ -91,7 +91,7 @@ function App() {
 
   //добавление карточки
   function handleAddPlaceSubmit(data) {
-    setIsLoading(true)
+    setIsLoading(true);
 
     api
       .editNewCard(data.name, data.link)
@@ -109,7 +109,7 @@ function App() {
   function handleDeleteClick(evt) {
     evt.preventDefault();
 
-    setIsLoading(true)
+    setIsLoading(true);
 
     api
       .deleteCard(cardDeleted._id)
@@ -144,6 +144,19 @@ function App() {
   }
 
   //закрытие попапов
+  useEffect(() => {
+    function handleEscClose(e) {
+      if (e.key === "Escape") {
+        closeAllPopups();
+      }
+    }  
+    document.addEventListener("keydown", handleEscClose, false);
+
+    return () => {
+      document.removeEventListener("keydown", handleEscClose, false);
+    };
+  }, []);
+
   function closeAllPopups() {
     setIsEditProfilePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
@@ -169,7 +182,7 @@ function App() {
         <PopupWithForm
           name="delete"
           title="Вы уверены?"
-          btnText = {isLoading ? "Удаление..." : "Да"}
+          btnText={isLoading ? "Удаление..." : "Да"}
           onSubmit={handleDeleteClick}
           onClose={closeAllPopups}
           isOpen={isDeletePopup}
@@ -179,7 +192,7 @@ function App() {
           onClose={closeAllPopups}
           isOpen={isEditProfilePopupOpen}
           onUpdateUser={handleOnUpdateUser}
-          isLoading = {isLoading}
+          isLoading={isLoading}
         ></EditProfilePopup>
 
         <AddPlacePopup
